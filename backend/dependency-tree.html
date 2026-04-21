@@ -579,10 +579,10 @@
       <p class="subtitle">Bean-үүдийн dependency бүтэц, DFS холбоос, reverse usage-г web хэлбэрээр харуулна.</p>
     </div>
     <div class="hero-stats">
-      <div class="stat-card"><span class="stat-label">Нийт Bean</span><strong>16</strong></div>
-      <div class="stat-card"><span class="stat-label">Singleton</span><strong>16</strong></div>
+      <div class="stat-card"><span class="stat-label">Нийт Bean</span><strong>17</strong></div>
+      <div class="stat-card"><span class="stat-label">Singleton</span><strong>17</strong></div>
       <div class="stat-card"><span class="stat-label">Prototype</span><strong>0</strong></div>
-      <div class="stat-card"><span class="stat-label">Root Node</span><strong>1</strong></div>
+      <div class="stat-card"><span class="stat-label">Root Node</span><strong>2</strong></div>
     </div>
   </div>
   <div class="toolbar">
@@ -611,26 +611,8 @@
       <ul class="tree">
 <li class="tree-item">
   <details class="tree-branch" open>
-    <summary class="node singleton" data-name="embeddedTomcatServer" data-type="mn.edu.num.carrental.infrastructure.server.EmbeddedTomcatServer" data-scope="SINGLETON" data-deps="4" data-search="embeddedtomcatserver mn.edu.num.carrental.infrastructure.server.embeddedtomcatserver" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> embeddedTomcatServer</summary>
+    <summary class="node singleton" data-name="databaseInitializer" data-type="mn.edu.num.carrental.infrastructure.database.DatabaseInitializer" data-scope="SINGLETON" data-deps="1" data-search="databaseinitializer mn.edu.num.carrental.infrastructure.database.databaseinitializer" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> databaseInitializer</summary>
     <ul>
-<li class="tree-item">
-  <span class="node leaf singleton" data-name="applicationConfig" data-type="mn.edu.num.carrental.infrastructure.config.ApplicationConfig" data-scope="SINGLETON" data-deps="0" data-search="applicationconfig mn.edu.num.carrental.infrastructure.config.applicationconfig" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> applicationConfig</span>
-</li>
-<li class="tree-item">
-  <details class="tree-branch" open>
-    <summary class="node singleton" data-name="carServlet" data-type="mn.edu.num.carrental.adapters.inbound.web.CarServlet" data-scope="SINGLETON" data-deps="2" data-search="carservlet mn.edu.num.carrental.adapters.inbound.web.carservlet" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> carServlet</summary>
-    <ul>
-<li class="tree-item">
-  <details class="tree-branch" open>
-    <summary class="node singleton" data-name="carRentalService" data-type="mn.edu.num.carrental.core.service.CarRentalService" data-scope="SINGLETON" data-deps="5" data-search="carrentalservice mn.edu.num.carrental.core.service.carrentalservice" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> carRentalService</summary>
-    <ul>
-<li class="tree-item">
-  <details class="tree-branch" open>
-    <summary class="node singleton" data-name="postgresCarAdapter" data-type="mn.edu.num.carrental.adapters.outbound.persistence.PostgresCarAdapter" data-scope="SINGLETON" data-deps="2" data-search="postgrescaradapter mn.edu.num.carrental.adapters.outbound.persistence.postgrescaradapter" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> postgresCarAdapter</summary>
-    <ul>
-<li class="tree-item">
-  <span class="node leaf singleton" data-name="persistenceMapper" data-type="mn.edu.num.carrental.adapters.outbound.persistence.mapper.PersistenceMapper" data-scope="SINGLETON" data-deps="0" data-search="persistencemapper mn.edu.num.carrental.adapters.outbound.persistence.mapper.persistencemapper" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> persistenceMapper</span>
-</li>
 <li class="tree-item">
   <details class="tree-branch" open>
     <summary class="node singleton" data-name="connectionPoolManager" data-type="mn.edu.num.carrental.infrastructure.database.ConnectionPoolManager" data-scope="SINGLETON" data-deps="1" data-search="connectionpoolmanager mn.edu.num.carrental.infrastructure.database.connectionpoolmanager" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> connectionPoolManager</summary>
@@ -647,6 +629,34 @@
 </li>
     </ul>
   </details>
+</li>
+    </ul>
+  </details>
+</li>
+<li class="tree-item">
+  <details class="tree-branch" open>
+    <summary class="node singleton" data-name="embeddedTomcatServer" data-type="mn.edu.num.carrental.infrastructure.server.EmbeddedTomcatServer" data-scope="SINGLETON" data-deps="4" data-search="embeddedtomcatserver mn.edu.num.carrental.infrastructure.server.embeddedtomcatserver" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> embeddedTomcatServer</summary>
+    <ul>
+<li class="tree-item">
+  <span class="node leaf singleton" data-name="applicationConfig" data-type="mn.edu.num.carrental.infrastructure.config.ApplicationConfig" data-scope="SINGLETON" data-deps="0" data-search="applicationconfig mn.edu.num.carrental.infrastructure.config.applicationconfig" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> applicationConfig</span>
+</li>
+<li class="tree-item">
+  <details class="tree-branch" open>
+    <summary class="node singleton" data-name="carServlet" data-type="mn.edu.num.carrental.adapters.inbound.web.CarServlet" data-scope="SINGLETON" data-deps="5" data-search="carservlet mn.edu.num.carrental.adapters.inbound.web.carservlet" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> carServlet</summary>
+    <ul>
+<li class="tree-item">
+  <details class="tree-branch" open>
+    <summary class="node singleton" data-name="carRentalService" data-type="mn.edu.num.carrental.core.service.CarRentalService" data-scope="SINGLETON" data-deps="5" data-search="carrentalservice mn.edu.num.carrental.core.service.carrentalservice" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> carRentalService</summary>
+    <ul>
+<li class="tree-item">
+  <details class="tree-branch" open>
+    <summary class="node singleton" data-name="postgresCarAdapter" data-type="mn.edu.num.carrental.adapters.outbound.persistence.PostgresCarAdapter" data-scope="SINGLETON" data-deps="2" data-search="postgrescaradapter mn.edu.num.carrental.adapters.outbound.persistence.postgrescaradapter" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> postgresCarAdapter</summary>
+    <ul>
+<li class="tree-item">
+  <span class="node leaf singleton" data-name="persistenceMapper" data-type="mn.edu.num.carrental.adapters.outbound.persistence.mapper.PersistenceMapper" data-scope="SINGLETON" data-deps="0" data-search="persistencemapper mn.edu.num.carrental.adapters.outbound.persistence.mapper.persistencemapper" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> persistenceMapper</span>
+</li>
+<li class="tree-item">
+  <span class="node leaf singleton reference-node" data-name="connectionPoolManager" data-type="mn.edu.num.carrental.infrastructure.database.ConnectionPoolManager" data-scope="SINGLETON" data-deps="1" data-search="connectionpoolmanager mn.edu.num.carrental.infrastructure.database.connectionpoolmanager" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> connectionPoolManager <span class="ref-tag">↑ ref</span></span>
 </li>
     </ul>
   </details>
@@ -675,6 +685,15 @@
 </li>
     </ul>
   </details>
+</li>
+<li class="tree-item">
+  <span class="node leaf singleton reference-node" data-name="carRentalService" data-type="mn.edu.num.carrental.core.service.CarRentalService" data-scope="SINGLETON" data-deps="5" data-search="carrentalservice mn.edu.num.carrental.core.service.carrentalservice" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> carRentalService <span class="ref-tag">↑ ref</span></span>
+</li>
+<li class="tree-item">
+  <span class="node leaf singleton reference-node" data-name="carRentalService" data-type="mn.edu.num.carrental.core.service.CarRentalService" data-scope="SINGLETON" data-deps="5" data-search="carrentalservice mn.edu.num.carrental.core.service.carrentalservice" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> carRentalService <span class="ref-tag">↑ ref</span></span>
+</li>
+<li class="tree-item">
+  <span class="node leaf singleton" data-name="webDtoMapper" data-type="mn.edu.num.carrental.adapters.inbound.web.mapper.WebDtoMapper" data-scope="SINGLETON" data-deps="0" data-search="webdtomapper mn.edu.num.carrental.adapters.inbound.web.mapper.webdtomapper" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> webDtoMapper</span>
 </li>
 <li class="tree-item">
   <span class="node leaf singleton" data-name="jsonConverter" data-type="mn.edu.num.carrental.shared.util.JsonConverter" data-scope="SINGLETON" data-deps="0" data-search="jsonconverter mn.edu.num.carrental.shared.util.jsonconverter" tabindex="0" role="button" onclick="showDetail(this)"><span class="scope-badge singleton">SINGLETON</span> jsonConverter</span>
@@ -720,6 +739,14 @@
 const beanData = {
   "beans": [
     {
+      "name": "databaseInitializer",
+      "type": "mn.edu.num.carrental.infrastructure.database.DatabaseInitializer",
+      "scope": "SINGLETON",
+      "dependencies": [
+        "connectionPoolManager"
+      ]
+    },
+    {
       "name": "dailyPricing",
       "type": "mn.edu.num.carrental.core.service.strategy.DailyPricing",
       "scope": "SINGLETON",
@@ -742,6 +769,9 @@ const beanData = {
       "scope": "SINGLETON",
       "dependencies": [
         "carRentalService",
+        "carRentalService",
+        "carRentalService",
+        "webDtoMapper",
         "jsonConverter"
       ]
     },

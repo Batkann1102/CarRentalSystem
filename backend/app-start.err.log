@@ -1,0 +1,10 @@
+[Database] PostgreSQL is unavailable, using in-memory fallback. FATAL: password authentication failed for user "postgres"
+[Database] Schema initialization skipped because PostgreSQL is not reachable.
+Apr 22, 2026 12:11:32 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-nio-8080"]
+Apr 22, 2026 12:11:32 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Tomcat]
+Apr 22, 2026 12:11:32 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet engine: [Apache Tomcat/10.1.39]
+Apr 22, 2026 12:11:32 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-8080"]

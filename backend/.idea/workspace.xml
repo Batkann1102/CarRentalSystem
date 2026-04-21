@@ -5,54 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f345e689-e22a-44c2-8d97-a0c23f6f3b64" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/inbound/web/dto/CarRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/exception/CarDeletionNotAllowedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/exception/DuplicateCarException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/ports/in/IGetCarsUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/ports/in/IManageCarsUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/infrastructure/database/DatabaseInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/AppShell.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/CarForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/CarTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/RentalForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/components/SummaryCards.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/pages/CarEditPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/pages/CarRentPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/pages/CarsPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/pages/DashboardPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../frontend/src/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dependency-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/App.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/config/ApplicationConfigComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/config/DatabaseConfigComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/database/ConnectionPoolManagerComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/server/EmbeddedTomcatServerComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/service/CarRentalServiceComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/service/InvoiceGeneratorComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/service/strategy/DailyPricingComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/service/strategy/HourlyPricingComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/bridge/shared/JsonConverterComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/inbound/web/CarServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/inbound/web/CorsFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/inbound/web/RentalServlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/inbound/web/dto/RentRequestDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/inbound/web/dto/RentResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/inbound/web/mapper/WebDtoMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/outbound/persistence/PostgresCarAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/outbound/persistence/PostgresRentalAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/outbound/persistence/entity/CarEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/outbound/persistence/entity/RentalEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/adapters/outbound/persistence/mapper/PersistenceMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/domain/Car.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/domain/Invoice.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/domain/Rental.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/domain/RentalType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/exception/CarNotAvailableException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/exception/CarNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/exception/InvalidRentalTypeException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/ports/in/IGetAvailableCarsUseCase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/ports/in/IGetRentalHistoryUseCase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/ports/in/IRentCarUseCase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/ports/out/ICarRepositoryPort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/ports/out/IRentalRepositoryPort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/service/CarRentalService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/service/InvoiceGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/service/strategy/DailyPricing.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/service/strategy/HourlyPricing.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/core/service/strategy/IPricingStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/infrastructure/config/ApplicationConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/infrastructure/config/DatabaseConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/infrastructure/database/ConnectionPoolManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/infrastructure/server/EmbeddedTomcatServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/shared/constants/ApiConstants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/shared/util/JsonConverter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/mn/edu/num/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/inbound/web/CarServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/inbound/web/CarServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/inbound/web/mapper/WebDtoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/inbound/web/mapper/WebDtoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/outbound/persistence/PostgresCarAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/outbound/persistence/PostgresCarAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/outbound/persistence/PostgresRentalAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/adapters/outbound/persistence/PostgresRentalAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/ports/out/ICarRepositoryPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/ports/out/ICarRepositoryPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/ports/out/IRentalRepositoryPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/ports/out/IRentalRepositoryPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/service/CarRentalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/core/service/CarRentalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/infrastructure/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/infrastructure/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/infrastructure/database/ConnectionPoolManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/infrastructure/database/ConnectionPoolManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/infrastructure/server/EmbeddedTomcatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/infrastructure/server/EmbeddedTomcatServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/shared/constants/ApiConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mn/edu/num/carrental/shared/constants/ApiConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/mn/edu/num/carrentaltests/AppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mn/edu/num/carrentaltests/AppTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

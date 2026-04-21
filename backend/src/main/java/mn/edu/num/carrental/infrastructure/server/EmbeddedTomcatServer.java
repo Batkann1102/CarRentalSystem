@@ -49,7 +49,7 @@ public class EmbeddedTomcatServer {
         Context context = tomcat.addContext(normalizeContextPath(applicationConfig.getContextPath()),
                 new File(".").getAbsolutePath());
 
-        registerServlet(context, "carServlet", carServlet, ApiConstants.AVAILABLE_CARS_ENDPOINT);
+        registerServlet(context, "carServlet", carServlet, ApiConstants.CARS_ENDPOINT + "/*");
         registerServlet(context, "rentalServlet", rentalServlet, ApiConstants.RENTAL_ENDPOINT);
         registerHealthServlet(context);
         registerCorsFilter(context);
@@ -59,6 +59,7 @@ public class EmbeddedTomcatServer {
         String baseUrl = "http://localhost:" + applicationConfig.getServerPort()
                 + displayContextPath(applicationConfig.getContextPath());
         System.out.println("CarRentalSystem backend started successfully.");
+        System.out.println("Cars endpoint: " + baseUrl + ApiConstants.CARS_ENDPOINT);
         System.out.println("Available cars endpoint: " + baseUrl + ApiConstants.AVAILABLE_CARS_ENDPOINT);
         System.out.println("Rent car endpoint: " + baseUrl + ApiConstants.RENTAL_ENDPOINT);
 

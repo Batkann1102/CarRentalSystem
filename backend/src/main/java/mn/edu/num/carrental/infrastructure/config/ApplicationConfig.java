@@ -22,6 +22,12 @@ public class ApplicationConfig {
     }
 
     public String getProperty(String key, String defaultValue) {
+        String environmentKey = key.toUpperCase().replace('.', '_').replace('-', '_');
+        String environmentValue = System.getenv(environmentKey);
+        if (environmentValue != null && !environmentValue.trim().isEmpty()) {
+            return environmentValue;
+        }
+
         return properties.getProperty(key, defaultValue);
     }
 

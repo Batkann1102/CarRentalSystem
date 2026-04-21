@@ -8,5 +8,7 @@ public interface IRentalRepositoryPort {
     Rental save(Rental rental);
 
     List<Rental> findAll();
+
+    boolean existsByCarId(String carId);
 }
 

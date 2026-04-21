@@ -22,6 +22,12 @@ import mn.edu.num.carrental.infrastructure.database.ConnectionPoolManager;
 @Component
 public class PostgresCarAdapter implements ICarRepositoryPort {
 
+    private static final String SELECT_ALL_SQL = """
+            SELECT id, brand, model, plate_number, rental_type, price_per_unit, available
+            FROM cars
+            ORDER BY brand, model
+            """;
+
     private static final String SELECT_AVAILABLE_SQL = """
             SELECT id, brand, model, plate_number, rental_type, price_per_unit, available
             FROM cars
@@ -47,6 +53,11 @@ public class PostgresCarAdapter implements ICarRepositoryPort {
                 available = EXCLUDED.available
             """;
 
+    private static final String DELETE_SQL = """
+            DELETE FROM cars
+            WHERE id = ?
+            """;
+
     private final Map<String, CarEntity> fallbackStore = new LinkedHashMap<>();
 
     @Autowired
@@ -60,57 +71,89 @@ public class PostgresCarAdapter implements ICarRepositoryPort {
     }
 
     @Override
-    public List<Car> findAvailableCars() {
-        Optional<Connection> connectionOptional = connectionPoolManager.getConnection();
-        if (connectionOptional.isPresent()) {
-            try (Connection connection = connectionOptional.get();
-                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_AVAILABLE_SQL);
-                 ResultSet resultSet = preparedStatement.executeQuery()) {
-                List<Car> cars = new ArrayList<>();
-                while (resultSet.next()) {
-                    cars.add(persistenceMapper.toDomain(mapCar(resultSet)));
-                }
-                if (!cars.isEmpty()) {
-                    return cars;
-                }
-            } catch (SQLException ex) {
-                System.err.println("[Persistence] Falling back to in-memory cars: " + ex.getMessage());
-            }
+    public List<Car> findAll() {
+        if (!connectionPoolManager.isDatabaseEnabled()) {
+            return getFallbackCars();
         }
 
-        return fallbackStore.values().stream()
-                .filter(CarEntity::isAvailable)
-                .map(persistenceMapper::toDomain)
-                .sorted(Comparator.comparing(Car::getBrand).thenComparing(Car::getModel))
-                .toList();
+        Optional<Connection> connectionOptional = connectionPoolManager.getConnection();
+        if (connectionOptional.isEmpty()) {
+            return getFallbackCars();
+        }
+
+        try (Connection connection = connectionOptional.get();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_SQL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            List<Car> cars = new ArrayList<>();
+            while (resultSet.next()) {
+                cars.add(persistenceMapper.toDomain(mapCar(resultSet)));
+            }
+            return cars;
+        } catch (SQLException ex) {
+            throw new IllegalStateException("Could not load cars from PostgreSQL: " + ex.getMessage(), ex);
+        }
+    }
+
+    @Override
+    public List<Car> findAvailableCars() {
+        if (!connectionPoolManager.isDatabaseEnabled()) {
+            return getFallbackAvailableCars();
+        }
+
+        Optional<Connection> connectionOptional = connectionPoolManager.getConnection();
+        if (connectionOptional.isEmpty()) {
+            return getFallbackAvailableCars();
+        }
+
+        try (Connection connection = connectionOptional.get();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_AVAILABLE_SQL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            List<Car> cars = new ArrayList<>();
+            while (resultSet.next()) {
+                cars.add(persistenceMapper.toDomain(mapCar(resultSet)));
+            }
+            return cars;
+        } catch (SQLException ex) {
+            throw new IllegalStateException("Could not load cars from PostgreSQL: " + ex.getMessage(), ex);
+        }
     }
 
     @Override
     public Optional<Car> findById(String carId) {
-        Optional<Connection> connectionOptional = connectionPoolManager.getConnection();
-        if (connectionOptional.isPresent()) {
-            try (Connection connection = connectionOptional.get();
-                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID_SQL)) {
-                preparedStatement.setString(1, carId);
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        return Optional.of(persistenceMapper.toDomain(mapCar(resultSet)));
-                    }
-                }
-            } catch (SQLException ex) {
-                System.err.println("[Persistence] Falling back to in-memory car lookup: " + ex.getMessage());
-            }
+        if (!connectionPoolManager.isDatabaseEnabled()) {
+            return findFallbackById(carId);
         }
 
-        return Optional.ofNullable(fallbackStore.get(carId)).map(persistenceMapper::toDomain);
+        Optional<Connection> connectionOptional = connectionPoolManager.getConnection();
+        if (connectionOptional.isEmpty()) {
+            return findFallbackById(carId);
+        }
+
+        try (Connection connection = connectionOptional.get();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID_SQL)) {
+            preparedStatement.setString(1, carId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return Optional.of(persistenceMapper.toDomain(mapCar(resultSet)));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new IllegalStateException("Could not load the car from PostgreSQL: " + ex.getMessage(), ex);
+        }
+
+        return Optional.empty();
     }
 
     @Override
     public void save(Car car) {
-        fallbackStore.put(car.getId(), persistenceMapper.toEntity(car));
+        if (!connectionPoolManager.isDatabaseEnabled()) {
+            fallbackStore.put(car.getId(), persistenceMapper.toEntity(car));
+            return;
+        }
 
         Optional<Connection> connectionOptional = connectionPoolManager.getConnection();
         if (connectionOptional.isEmpty()) {
+            fallbackStore.put(car.getId(), persistenceMapper.toEntity(car));
             return;
         }
 
@@ -125,7 +168,29 @@ public class PostgresCarAdapter implements ICarRepositoryPort {
             preparedStatement.setBoolean(7, car.isAvailable());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            System.err.println("[Persistence] Could not persist car to PostgreSQL: " + ex.getMessage());
+            throw new IllegalStateException("Could not persist the car to PostgreSQL: " + ex.getMessage(), ex);
+        }
+    }
+
+    @Override
+    public void deleteById(String carId) {
+        if (!connectionPoolManager.isDatabaseEnabled()) {
+            fallbackStore.remove(carId);
+            return;
+        }
+
+        Optional<Connection> connectionOptional = connectionPoolManager.getConnection();
+        if (connectionOptional.isEmpty()) {
+            fallbackStore.remove(carId);
+            return;
+        }
+
+        try (Connection connection = connectionOptional.get();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)) {
+            preparedStatement.setString(1, carId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new IllegalStateException("Could not delete the car from PostgreSQL: " + ex.getMessage(), ex);
         }
     }
 
@@ -138,6 +203,23 @@ public class PostgresCarAdapter implements ICarRepositoryPort {
                 "HOURLY", new BigDecimal("35000"), true));
         fallbackStore.put("CAR-004", new CarEntity("CAR-004", "Kia", "Morning", "UBA-8192",
                 "HOURLY", new BigDecimal("22000"), true));
+    }
+
+    private List<Car> getFallbackAvailableCars() {
+        return getFallbackCars().stream()
+                .filter(Car::isAvailable)
+                .toList();
+    }
+
+    private List<Car> getFallbackCars() {
+        return fallbackStore.values().stream()
+                .map(persistenceMapper::toDomain)
+                .sorted(Comparator.comparing(Car::getBrand).thenComparing(Car::getModel))
+                .toList();
+    }
+
+    private Optional<Car> findFallbackById(String carId) {
+        return Optional.ofNullable(fallbackStore.get(carId)).map(persistenceMapper::toDomain);
     }
 
     private CarEntity mapCar(ResultSet resultSet) throws SQLException {

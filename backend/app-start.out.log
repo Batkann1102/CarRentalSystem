@@ -1,0 +1,73 @@
+[IoC] Primary source: mn.edu.num.carrental.App
+[Context] ????? ?????... package: mn.edu.num.carrental
+[Scanner] ???????: carServlet ? mn.edu.num.carrental.adapters.inbound.web.CarServlet
+[Scanner] ???????: corsFilter ? mn.edu.num.carrental.adapters.inbound.web.CorsFilter
+[Scanner] ???????: webDtoMapper ? mn.edu.num.carrental.adapters.inbound.web.mapper.WebDtoMapper
+[Scanner] ???????: rentalServlet ? mn.edu.num.carrental.adapters.inbound.web.RentalServlet
+[Scanner] ???????: persistenceMapper ? mn.edu.num.carrental.adapters.outbound.persistence.mapper.PersistenceMapper
+[Scanner] ???????: postgresCarAdapter ? mn.edu.num.carrental.adapters.outbound.persistence.PostgresCarAdapter
+[Scanner] ???????: postgresRentalAdapter ? mn.edu.num.carrental.adapters.outbound.persistence.PostgresRentalAdapter
+[Scanner] ???????: carRentalService ? mn.edu.num.carrental.core.service.CarRentalService
+[Scanner] ???????: invoiceGenerator ? mn.edu.num.carrental.core.service.InvoiceGenerator
+[Scanner] ???????: dailyPricing ? mn.edu.num.carrental.core.service.strategy.DailyPricing
+[Scanner] ???????: hourlyPricing ? mn.edu.num.carrental.core.service.strategy.HourlyPricing
+[Scanner] ???????: applicationConfig ? mn.edu.num.carrental.infrastructure.config.ApplicationConfig
+[Scanner] ???????: databaseConfig ? mn.edu.num.carrental.infrastructure.config.DatabaseConfig
+[Scanner] ???????: connectionPoolManager ? mn.edu.num.carrental.infrastructure.database.ConnectionPoolManager
+[Scanner] ???????: databaseInitializer ? mn.edu.num.carrental.infrastructure.database.DatabaseInitializer
+[Scanner] ???????: embeddedTomcatServer ? mn.edu.num.carrental.infrastructure.server.EmbeddedTomcatServer
+[Scanner] ???????: jsonConverter ? mn.edu.num.carrental.shared.util.JsonConverter
+[Injector] Inject: postgresCarAdapter.persistenceMapper
+[Injector] Inject: databaseConfig.applicationConfig
+[Injector] Inject: connectionPoolManager.databaseConfig
+[Injector] Inject: postgresCarAdapter.connectionPoolManager
+[Injector] Inject: carRentalService.carRepositoryPort
+[Injector] Inject: postgresRentalAdapter.persistenceMapper
+[Injector] Inject: postgresRentalAdapter.connectionPoolManager
+[Injector] Inject: carRentalService.rentalRepositoryPort
+[Injector] Inject: carRentalService.invoiceGenerator
+[Injector] Inject: carRentalService.hourlyPricing
+[Injector] Inject: carRentalService.dailyPricing
+[Injector] Inject: carServlet.getAvailableCarsUseCase
+[Injector] Inject: carServlet.jsonConverter
+[Injector] Inject: rentalServlet.rentCarUseCase
+[Injector] Inject: rentalServlet.getRentalHistoryUseCase
+[Injector] Inject: rentalServlet.webDtoMapper
+[Injector] Inject: rentalServlet.jsonConverter
+[Injector] Inject: databaseInitializer.connectionPoolManager
+[Injector] Inject: embeddedTomcatServer.applicationConfig
+[Injector] Inject: embeddedTomcatServer.carServlet
+[Injector] Inject: embeddedTomcatServer.rentalServlet
+[Injector] Inject: embeddedTomcatServer.corsFilter
+ApplicationContext
+ ?? databaseInitializer (SINGLETON)
+ ?    ?? connectionPoolManager (SINGLETON)
+ ?         ?? databaseConfig (SINGLETON)
+ ?              ?? applicationConfig (SINGLETON)
+ ?? embeddedTomcatServer (SINGLETON)
+      ?? applicationConfig (SINGLETON)
+      ?? carServlet (SINGLETON)
+      ?    ?? carRentalService (SINGLETON)
+      ?    ?    ?? postgresCarAdapter (SINGLETON)
+      ?    ?    ?    ?? persistenceMapper (SINGLETON)
+      ?    ?    ?    ?? connectionPoolManager (SINGLETON)
+      ?    ?    ?? postgresRentalAdapter (SINGLETON)
+      ?    ?    ?    ?? persistenceMapper (SINGLETON)
+      ?    ?    ?    ?? connectionPoolManager (SINGLETON)
+      ?    ?    ?? invoiceGenerator (SINGLETON)
+      ?    ?    ?? hourlyPricing (SINGLETON)
+      ?    ?    ?? dailyPricing (SINGLETON)
+      ?    ?? jsonConverter (SINGLETON)
+      ?? rentalServlet (SINGLETON)
+      ?    ?? carRentalService (SINGLETON)
+      ?    ?? carRentalService (SINGLETON)
+      ?    ?? webDtoMapper (SINGLETON)
+      ?    ?? jsonConverter (SINGLETON)
+      ?? corsFilter (SINGLETON)
+
+[Context] Container ????? ??????.
+[Visualizer] HTML ???? ????????: C:\4_Havar\Diplom\Example_project\CarRentalSystem\backend\dependency-tree.html
+[Visualizer] Browser-? ???? ?????...
+CarRentalSystem backend started successfully.
+Available cars endpoint: http://localhost:8080/api/cars/available
+Rent car endpoint: http://localhost:8080/api/rentals
