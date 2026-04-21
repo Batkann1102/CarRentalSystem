@@ -14,7 +14,6 @@ Hexagonal-style Java backend for a car rental system using the custom IoC/DI fra
 - `core`: domain models, ports, services, strategies, exceptions
 - `adapters.inbound.web`: servlets, DTOs, mapper, CORS filter
 - `adapters.outbound.persistence`: PostgreSQL-shaped adapters, entities, mapper
-- `adapters.bridge`: thin IoC bridge beans used because the custom framework scans a single package root in this project setup
 - `infrastructure`: application config, database access helper, embedded server
 - `shared`: JSON helper and API constants
 
@@ -37,7 +36,7 @@ Hexagonal-style Java backend for a car rental system using the custom IoC/DI fra
 ## Run
 ```powershell
 mvn test
-mvn exec:java -Dexec.mainClass="mn.edu.num.App"
+mvn exec:java -Dexec.mainClass="mn.edu.num.carrental.App"
 ```
 
 ## PostgreSQL
