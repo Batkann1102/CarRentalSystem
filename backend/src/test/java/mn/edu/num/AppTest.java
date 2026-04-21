@@ -1,38 +1,69 @@
 package mn.edu.num;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import java.util.List;
+import mn.edu.num.container.ApplicationContext;
+import mn.edu.num.core.domain.Car;
+import mn.edu.num.core.domain.Invoice;
+import mn.edu.num.core.domain.RentalType;
+import mn.edu.num.core.exception.InvalidRentalTypeException;
+import mn.edu.num.core.ports.in.IGetAvailableCarsUseCase;
+import mn.edu.num.core.ports.in.IGetRentalHistoryUseCase;
+import mn.edu.num.core.ports.in.IRentCarUseCase;
+import org.junit.jupiter.api.Test;
+
+class AppTest {
+
+    @Test
+    void contextShouldProvideSeededAvailableCars() {
+        ApplicationContext applicationContext = ApplicationContext.run(App.class);
+
+        IGetAvailableCarsUseCase useCase = applicationContext.getBean(IGetAvailableCarsUseCase.class);
+        List<Car> availableCars = useCase.getAvailableCars();
+
+        assertFalse(availableCars.isEmpty());
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    void rentingCarShouldGenerateInvoiceAndHideCarFromAvailabilityList() {
+        ApplicationContext applicationContext = ApplicationContext.run(App.class);
+
+        IGetAvailableCarsUseCase getAvailableCarsUseCase = applicationContext.getBean(IGetAvailableCarsUseCase.class);
+        IGetRentalHistoryUseCase getRentalHistoryUseCase = applicationContext.getBean(IGetRentalHistoryUseCase.class);
+        IRentCarUseCase rentCarUseCase = applicationContext.getBean(IRentCarUseCase.class);
+
+        Car selectedCar = getAvailableCarsUseCase.getAvailableCars().get(0);
+        Invoice invoice = rentCarUseCase.rentCar(
+                selectedCar.getId(),
+                "JUnit Customer",
+                selectedCar.getRentalType(),
+                2
+        );
+
+        assertNotNull(invoice.getInvoiceId());
+        assertTrue(getAvailableCarsUseCase.getAvailableCars().stream()
+                .noneMatch(car -> car.getId().equals(selectedCar.getId())));
+        assertTrue(getRentalHistoryUseCase.getRentalHistory().stream()
+                .anyMatch(rental -> rental.getId().equals(invoice.getRentalId())));
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    void incompatibleRentalTypeShouldThrowException() {
+        ApplicationContext applicationContext = ApplicationContext.run(App.class);
+
+        IGetAvailableCarsUseCase getAvailableCarsUseCase = applicationContext.getBean(IGetAvailableCarsUseCase.class);
+        IRentCarUseCase rentCarUseCase = applicationContext.getBean(IRentCarUseCase.class);
+
+        Car hourlyCar = getAvailableCarsUseCase.getAvailableCars().stream()
+                .filter(car -> car.getRentalType() == RentalType.HOURLY)
+                .findFirst()
+                .orElseThrow();
+
+        assertThrows(InvalidRentalTypeException.class,
+                () -> rentCarUseCase.rentCar(hourlyCar.getId(), "JUnit Customer", RentalType.DAILY, 1));
     }
 }
